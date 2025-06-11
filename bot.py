@@ -6,12 +6,13 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from telegram import InputFile
 from telegram.ext import ApplicationBuilder
 from healthcheck import keep_alive
+import os
 
 keep_alive()  # Start the health check server
 # Load environment variables
 
-TELEGRAM_BOT_TOKEN = dotenv.get_key(".env", "BOT_TOKEN")
-TELEGRAM_CHAT_ID = dotenv.get_key(".env", "TELEGRAM_ID")
+TELEGRAM_BOT_TOKEN = os.getenv("BOT_TOKEN") 
+TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_ID")
 
 kanji_groups = [
     ['言', '手', '自', '者', '事', '思', '会', '家', '的', '方', '地', '目', '場', '代', '私', '立', '物', '田', '体', '動'],
