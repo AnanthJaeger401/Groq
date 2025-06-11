@@ -5,8 +5,11 @@ import stateload
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from telegram import InputFile
 from telegram.ext import ApplicationBuilder
+from healthcheck import keep_alive
 
+keep_alive()  # Start the health check server
 # Load environment variables
+
 TELEGRAM_BOT_TOKEN = dotenv.get_key(".env", "BOT_TOKEN")
 TELEGRAM_CHAT_ID = dotenv.get_key(".env", "TELEGRAM_ID")
 
