@@ -22,8 +22,6 @@ Words Kunyomi: [漢字(かな)] = [English], [漢字(かな)] = [English]
 - Make sure the whole response is of maximum 4096 characters, including the kanji list and the paragraphs.
 """
 
-
-
 async def get_kanji_info(kanji_20):
     client = Groq(api_key=dotenv.get_key(".env", "GROQ_API_KEY"))
     prompt = create_prompt(kanji_20)
