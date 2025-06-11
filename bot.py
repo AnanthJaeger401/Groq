@@ -60,7 +60,7 @@ async def main():
     application = ApplicationBuilder().token(TELEGRAM_BOT_TOKEN).build()
 
     scheduler = AsyncIOScheduler()
-    scheduler.add_job(send_telegram_message, trigger="cron", hour=16, minute=9, args=[application])
+    scheduler.add_job(send_telegram_message, trigger="cron", hour=19, minute=30, args=[application])
     scheduler.start()
 
     print("Scheduler started. Waiting for jobs...")
