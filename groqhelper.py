@@ -3,24 +3,33 @@ import asyncio
 import dotenv
 
 def create_prompt(kanji):
-   return f"""For each of the following kanji: {' '.join(kanji)}, return a concise explanation under a subtitle for each kanji.
+   return f"""For each of the following kanji: {' '.join(kanji)}, provide a concise explanation formatted for Telegram message bubbles.
 
-Format each kanji like this (optimized for Telegram message bubbles):
+Use the following format for each kanji:
 
-1.[Kanji]
-Onyomi: [ひらがな]  
-Kunyomi: [ひらがな]  
-Words Onyomi: [漢字(かな)] = [English], [漢字(かな)] = [English]  
-Words Kunyomi: [漢字(かな)] = [English], [漢字(かな)] = [English]
+1. [Kanji]  
+Onyomi: ひらがな  
+Kunyomi: ひらがな  
+▶ Onyomi Words:  
+[漢字(かな)] = [English],  
+[漢字(かな)] = [English],  
+[漢字(かな)] = [English]  
+▶ Kunyomi Words:  
+[漢字(かな)] = [English],  
+[漢字(かな)] = [English],  
+[漢字(かな)] = [English]
 
-- Show Onyomi and Kunyomi readings in hiragana.  
-- Show vocab in kanji with hiragana readings in parentheses.  
-- Keep each line under ~35–40 characters.  
-- Only include 1–3 vocab per reading type.  
-- No extra spacing or explanation outside the blocks.
-- At the end, provide 2 paragraphs that use all the kanji in their different readings, with a focus on natural usage.
-- Make sure the whole response is of maximum 4096 characters, including the kanji list and the paragraphs.
+- Break vocabulary into new lines to keep each under ~35–40 characters to prevent message wrap in Telegram.  
+- Show Onyomi and Kunyomi in **hiragana** only.  
+- Vocab must include **kanji + kana in parentheses** + brief English meaning.  
+- Include **3 examples per reading** (no more than 4).  
+- No extra spacing or explanations between kanji blocks.
+
+At the end, include **2 short natural Japanese paragraphs** (with English translation), that demonstrate real-life usage of as many kanji from the list as possible.  
+- Limit paragraph lines to ~35 characters for Telegram.  
+- The full response must not exceed **4096 characters**.
 """
+
 
 async def get_kanji_info(kanji_20):
     client = Groq(api_key=dotenv.get_key(".env", "GROQ_API_KEY"))
